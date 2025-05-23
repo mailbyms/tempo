@@ -155,13 +155,8 @@ public class SongBottomSheetDialog extends BottomSheetDialogFragment implements 
         });
 
         TextView download = view.findViewById(R.id.download_text_view);
-        download.setOnClickListener(v -> {
-            DownloadUtil.getDownloadTracker(requireContext()).download(
-                    MappingUtil.mapDownload(song),
-                    new Download(song)
-            );
-            dismissBottomSheet();
-        });
+        // 禁用下载选项
+        download.setVisibility(View.GONE);
 
         TextView remove = view.findViewById(R.id.remove_text_view);
         remove.setOnClickListener(v -> {
@@ -244,7 +239,8 @@ public class SongBottomSheetDialog extends BottomSheetDialogFragment implements 
         if (DownloadUtil.getDownloadTracker(requireContext()).isDownloaded(song.getId())) {
             remove.setVisibility(View.VISIBLE);
         } else {
-            download.setVisibility(View.VISIBLE);
+            // 禁用下载选项
+            download.setVisibility(View.GONE);
             remove.setVisibility(View.GONE);
         }
     }

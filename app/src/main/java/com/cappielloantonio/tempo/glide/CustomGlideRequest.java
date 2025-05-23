@@ -130,6 +130,7 @@ public class CustomGlideRequest {
         public RequestBuilder<Drawable> build() {
             return requestManager
                     .load(item)
+                    .timeout(30000)  //超时时间改为30秒
                     .transition(DrawableTransitionOptions.withCrossFade());
         }
     }

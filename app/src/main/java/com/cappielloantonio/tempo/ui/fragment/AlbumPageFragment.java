@@ -60,6 +60,11 @@ public class AlbumPageFragment extends Fragment implements ClickCallback {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.album_page_menu, menu);
+
+        MenuItem downloadAllItem = menu.findItem(R.id.action_download_album);
+        if (downloadAllItem != null) {
+            downloadAllItem.setVisible(false); // 或者使用 setEnabled(false) 来禁用但保留菜单项
+        }
     }
 
     @Override

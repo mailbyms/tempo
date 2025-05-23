@@ -197,13 +197,11 @@ public class DownloadFragment extends Fragment implements ClickCallback {
 
         popup.setOnMenuItemClickListener(menuItem -> {
             if (menuItem.getItemId() == R.id.menu_download_group_by_track) {
-                downloadViewModel.initViewStack(new DownloadStack(Constants.DOWNLOAD_TYPE_TRACK, null));
-                Preferences.setDefaultDownloadViewType(Constants.DOWNLOAD_TYPE_TRACK);
-                return true;
+                // 禁用歌曲下载菜单项
+                return false; // 返回 false 表示不处理该点击事件
             } else if (menuItem.getItemId() == R.id.menu_download_group_by_album) {
-                downloadViewModel.initViewStack(new DownloadStack(Constants.DOWNLOAD_TYPE_ALBUM, null));
-                Preferences.setDefaultDownloadViewType(Constants.DOWNLOAD_TYPE_ALBUM);
-                return true;
+                // 禁用专辑下载菜单项
+                return false; // 返回 false 表示不处理该点击事件
             } else if (menuItem.getItemId() == R.id.menu_download_group_by_artist) {
                 downloadViewModel.initViewStack(new DownloadStack(Constants.DOWNLOAD_TYPE_ARTIST, null));
                 Preferences.setDefaultDownloadViewType(Constants.DOWNLOAD_TYPE_ARTIST);
