@@ -4,8 +4,6 @@ import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.app.TaskStackBuilder
 import android.content.Intent
-import androidx.media3.cast.CastPlayer
-import androidx.media3.cast.SessionAvailabilityListener
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
@@ -23,15 +21,11 @@ import com.cappielloantonio.tempo.util.Constants
 import com.cappielloantonio.tempo.util.DownloadUtil
 import com.cappielloantonio.tempo.util.Preferences
 import com.cappielloantonio.tempo.util.ReplayGainUtil
-import com.google.android.gms.cast.framework.CastContext
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
 
 @UnstableApi
-class MediaService : MediaLibraryService(), SessionAvailabilityListener {
+class MediaService : MediaLibraryService() {
     private lateinit var automotiveRepository: AutomotiveRepository
     private lateinit var player: ExoPlayer
-    private lateinit var castPlayer: CastPlayer
     private lateinit var mediaLibrarySession: MediaLibrarySession
 
     override fun onCreate() {
@@ -39,13 +33,12 @@ class MediaService : MediaLibraryService(), SessionAvailabilityListener {
 
         initializeRepository()
         initializePlayer()
-        initializeCastPlayer()
         initializeMediaLibrarySession()
         initializePlayerListener()
 
         setPlayer(
                 null,
-                if (this::castPlayer.isInitialized && castPlayer.isCastSessionAvailable) castPlayer else player
+                player
         )
     }
 
@@ -79,15 +72,6 @@ class MediaService : MediaLibraryService(), SessionAvailabilityListener {
                 .setWakeMode(C.WAKE_MODE_NETWORK)
                 .setLoadControl(initializeLoadControl())
                 .build()
-    }
-
-    private fun initializeCastPlayer() {
-        if (GoogleApiAvailability.getInstance()
-                        .isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS
-        ) {
-            castPlayer = CastPlayer(CastContext.getSharedInstance(this))
-            castPlayer.setSessionAvailabilityListener(this)
-        }
     }
 
     private fun initializeMediaLibrarySession() {
@@ -187,8 +171,6 @@ class MediaService : MediaLibraryService(), SessionAvailabilityListener {
     }
 
     private fun releasePlayer() {
-        if (this::castPlayer.isInitialized) castPlayer.setSessionAvailabilityListener(null)
-        if (this::castPlayer.isInitialized) castPlayer.release()
         player.release()
         mediaLibrarySession.release()
         automotiveRepository.deleteMetadata()
@@ -199,12 +181,4 @@ class MediaService : MediaLibraryService(), SessionAvailabilityListener {
 
     private fun getMediaSourceFactory() =
             DefaultMediaSourceFactory(this).setDataSourceFactory(DownloadUtil.getDataSourceFactory(this))
-
-    override fun onCastSessionAvailable() {
-        setPlayer(player, castPlayer)
-    }
-
-    override fun onCastSessionUnavailable() {
-        setPlayer(castPlayer, player)
-    }
 }
