@@ -16,6 +16,7 @@ import com.cappielloantonio.tempo.subsonic.models.ArtistID3;
 import com.cappielloantonio.tempo.subsonic.models.Child;
 
 import java.util.List;
+import java.util.Objects;
 
 public class AlbumPageViewModel extends AndroidViewModel {
     private final AlbumRepository albumRepository;
@@ -48,7 +49,7 @@ public class AlbumPageViewModel extends AndroidViewModel {
     }
 
     public LiveData<ArtistID3> getArtist() {
-        return artistRepository.getArtistInfo(albumId);
+        return artistRepository.getArtistInfo(Objects.requireNonNull(getAlbum().getValue()).getArtistId());
     }
 
     public LiveData<AlbumInfo> getAlbumInfo() {
