@@ -74,6 +74,7 @@ public class TrackInfoDialog extends DialogFragment {
             bind.bitrateValueSector.setText(mediaMetadata.extras.getInt("bitrate", 0) + " kbps");
             bind.pathValueSector.setText(mediaMetadata.extras.getString("path", getString(R.string.label_placeholder)));
             bind.discNumberValueSector.setText(String.valueOf(mediaMetadata.extras.getInt("discNumber", 0)));
+            bind.bpmValueSector.setText(String.valueOf(mediaMetadata.extras.getInt("bpm", 0)));
         }
     }
 

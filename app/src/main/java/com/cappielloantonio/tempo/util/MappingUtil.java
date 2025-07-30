@@ -54,6 +54,7 @@ public class MappingUtil {
         bundle.putString("transcodedSuffix", media.getTranscodedSuffix());
         bundle.putInt("duration", media.getDuration() != null ? media.getDuration() : 0);
         bundle.putInt("bitrate", media.getBitrate() != null ? media.getBitrate() : 0);
+        bundle.putInt("bpm", media.getBpm() != null ? media.getBpm() : 0);
         bundle.putString("path", media.getPath());
         bundle.putBoolean("isVideo", media.isVideo());
         bundle.putInt("userRating", media.getUserRating() != null ? media.getUserRating() : 0);

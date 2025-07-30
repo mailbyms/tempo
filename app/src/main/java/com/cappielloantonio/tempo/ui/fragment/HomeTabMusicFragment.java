@@ -157,11 +157,13 @@ public class HomeTabMusicFragment extends Fragment implements ClickCallback {
     }
 
     private void init() {
+        // 首页 - 发现，长按行为
         bind.discoveryTextViewRefreshable.setOnLongClickListener(v -> {
             homeViewModel.refreshDiscoverySongSample(getViewLifecycleOwner());
             return true;
         });
 
+        // 首页 - 发现 - 全部随机播放，点击行为
         bind.discoveryTextViewClickable.setOnClickListener(v -> {
             homeViewModel.getRandomShuffleSample().observe(getViewLifecycleOwner(), songs -> {
                 MusicUtil.ratingFilter(songs);

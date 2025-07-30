@@ -51,6 +51,8 @@ open class Child(
     @SerializedName("bitRate")
     var bitrate: Int? = null,
     @ColumnInfo
+    var bpm: Int? = null,
+    @ColumnInfo
     var path: String? = null,
     @ColumnInfo(name = "is_video")
     @SerializedName("isVideo")

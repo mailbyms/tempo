@@ -392,6 +392,7 @@
     <string name="track_info_album">Album</string>
     <string name="track_info_artist">Artist</string>
     <string name="track_info_bitrate">Bitrate</string>
+    <string name="track_info_bpm">BPM</string>
     <string name="track_info_content_type">Content Type</string>
     <string name="track_info_dialog_positive_button">OK</string>
     <string name="track_info_dialog_title">Track info</string>

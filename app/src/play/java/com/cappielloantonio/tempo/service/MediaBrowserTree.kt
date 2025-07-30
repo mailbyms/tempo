@@ -332,6 +332,7 @@ object MediaBrowserTree {
         return treeNodes[ROOT_ID]!!.item
     }
 
+    // 车机的限制
     fun getChildren(
         id: String
     ): ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> {
@@ -341,18 +342,18 @@ object MediaBrowserTree {
             LIBRARY_ID -> treeNodes[LIBRARY_ID]?.getChildren()!!
             OTHER_ID -> treeNodes[OTHER_ID]?.getChildren()!!
 
-            MOST_PLAYED_ID -> automotiveRepository.getAlbums(id, "frequent", 100)
-            LAST_PLAYED_ID -> automotiveRepository.getAlbums(id, "recent", 100)
-            RECENTLY_ADDED_ID -> automotiveRepository.getAlbums(id, "newest", 100)
-            RECENT_SONGS_ID -> automotiveRepository.getRecentlyPlayedSongs(getServerId(),100)
+            MOST_PLAYED_ID -> automotiveRepository.getAlbums(id, "frequent", 200)
+            LAST_PLAYED_ID -> automotiveRepository.getAlbums(id, "recent", 200)
+            RECENTLY_ADDED_ID -> automotiveRepository.getAlbums(id, "newest", 200)
+            RECENT_SONGS_ID -> automotiveRepository.getRecentlyPlayedSongs(getServerId(),200)
             MADE_FOR_YOU_ID -> automotiveRepository.getStarredArtists(id)
             STARRED_TRACKS_ID -> automotiveRepository.starredSongs
             STARRED_ALBUMS_ID -> automotiveRepository.getStarredAlbums(id)
             STARRED_ARTISTS_ID -> automotiveRepository.getStarredArtists(id)
-            RANDOM_ID -> automotiveRepository.getRandomSongs(100)
+            RANDOM_ID -> automotiveRepository.getRandomSongs(200)
             FOLDER_ID -> automotiveRepository.getMusicFolders(id)
             PLAYLIST_ID -> automotiveRepository.getPlaylists(id)
-            PODCAST_ID -> automotiveRepository.getNewestPodcastEpisodes(100)
+            PODCAST_ID -> automotiveRepository.getNewestPodcastEpisodes(200)
             RADIO_ID -> automotiveRepository.internetRadioStations
 
             else -> {

@@ -30,7 +30,7 @@ public class AlbumSongListClient {
     }
 
     public Call<ApiResponse> getRandomSongs(int size, Integer fromYear, Integer toYear) {
-        Log.d(TAG, "getRandomSongs()");
+        Log.d(TAG, "getRandomSongs(), size: "+ size);
         return albumSongListService.getRandomSongs(subsonic.getParams(), size, fromYear, toYear);
     }
 

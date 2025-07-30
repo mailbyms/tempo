@@ -147,7 +147,7 @@ public class AutomotiveRepository {
 
         App.getSubsonicClientInstance(false)
                 .getAlbumSongListClient()
-                .getRandomSongs(100, null, null)
+                .getRandomSongs(200, null, null)
                 .enqueue(new Callback<ApiResponse>() {
                     @Override
                     public void onResponse(@NonNull Call<ApiResponse> call, @NonNull Response<ApiResponse> response) {
