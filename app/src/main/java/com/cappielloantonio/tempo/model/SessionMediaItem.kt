@@ -130,6 +130,9 @@ class SessionMediaItem() {
     @ColumnInfo(name = "timestamp")
     var timestamp: Long? = null
 
+    @ColumnInfo
+    var bpm: Int? = null
+
     constructor(child: Child) : this() {
         id = child.id
         parentId = child.parentId
@@ -162,6 +165,7 @@ class SessionMediaItem() {
         bookmarkPosition = child.bookmarkPosition
         originalWidth = child.originalWidth
         originalHeight = child.originalHeight
+        bpm = child.bpm
     }
 
     constructor(podcastEpisode: PodcastEpisode) : this() {
@@ -216,6 +220,7 @@ class SessionMediaItem() {
         bundle.putString("transcodedSuffix", transcodedSuffix)
         bundle.putInt("duration", duration ?: 0)
         bundle.putInt("bitrate", bitrate ?: 0)
+        bundle.putInt("bpm", bpm ?: 0)
         bundle.putString("path", path)
         bundle.putBoolean("isVideo", isVideo)
         bundle.putInt("userRating", userRating ?: 0)

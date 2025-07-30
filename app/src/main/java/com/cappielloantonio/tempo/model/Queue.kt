@@ -41,6 +41,7 @@ class Queue(override val id: String) : Child(id) {
         transcodedSuffix = child.transcodedSuffix
         duration = child.duration
         bitrate = child.bitrate
+        bpm = child.bpm
         path = child.path
         isVideo = child.isVideo
         userRating = child.userRating
