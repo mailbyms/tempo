@@ -15,6 +15,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class AlbumColorHelper {
@@ -113,22 +115,65 @@ public class AlbumColorHelper {
     }
 
     /**
-     * 从Palette中获取主要颜色
+     * 从Palette中获取主要颜色，通过加权平均计算
+     * 主要颜色占比50%，其它颜色按比例分配剩余权重
      */
     private static int getDominantColor(@NonNull Palette palette) {
-        // 优先选择主要颜色，如果没有则选择鲜艳的颜色
+        List<Integer> colors = new ArrayList<>();
+        List<Double> weights = new ArrayList<>();
+        
+        // 收集所有可用的颜色及其权重
         if (palette.getDominantSwatch() != null) {
-            return palette.getDominantSwatch().getRgb();
-        } else if (palette.getVibrantSwatch() != null) {
-            return palette.getVibrantSwatch().getRgb();
-        } else if (palette.getMutedSwatch() != null) {
-            return palette.getMutedSwatch().getRgb();
-        } else if (palette.getLightVibrantSwatch() != null) {
-            return palette.getLightVibrantSwatch().getRgb();
-        } else if (palette.getDarkMutedSwatch() != null) {
-            return palette.getDarkMutedSwatch().getRgb();
+            colors.add(palette.getDominantSwatch().getRgb());
+            weights.add(0.5); // 主要颜色占比50%
         }
-        return Color.TRANSPARENT;
+        if (palette.getVibrantSwatch() != null) {
+            colors.add(palette.getVibrantSwatch().getRgb());
+            weights.add(0.125); // 其它颜色各占12.5%
+        }
+        if (palette.getMutedSwatch() != null) {
+            colors.add(palette.getMutedSwatch().getRgb());
+            weights.add(0.125);
+        }
+        if (palette.getLightVibrantSwatch() != null) {
+            colors.add(palette.getLightVibrantSwatch().getRgb());
+            weights.add(0.125);
+        }
+        if (palette.getDarkMutedSwatch() != null) {
+            colors.add(palette.getDarkMutedSwatch().getRgb());
+            weights.add(0.125);
+        }
+        
+        // 如果没有可用颜色，返回透明色
+        if (colors.isEmpty()) {
+            return Color.TRANSPARENT;
+        }
+        
+        // 如果只有主要颜色，则直接返回
+        if (colors.size() == 1) {
+            return colors.get(0);
+        }
+        
+        // 计算加权平均值
+        double red = 0, green = 0, blue = 0;
+        double totalWeight = 0;
+        
+        for (int i = 0; i < colors.size(); i++) {
+            int color = colors.get(i);
+            double weight = weights.get(i);
+            
+            red += Color.red(color) * weight;
+            green += Color.green(color) * weight;
+            blue += Color.blue(color) * weight;
+            totalWeight += weight;
+        }
+        
+        // 确保总权重为1（由于浮点数精度问题）
+        if (totalWeight > 0) {
+            return Color.rgb((int) (red / totalWeight), (int) (green / totalWeight), (int) (blue / totalWeight));
+        } else {
+            return Color.TRANSPARENT;
+        }
     }
 
     /**
@@ -140,18 +185,6 @@ public class AlbumColorHelper {
         float[] hsv = new float[3];
         Color.colorToHSV(color, hsv);
         hsv[2] = hsv[2] * 0.2f; // 将亮度降低80%
-        return Color.HSVToColor(hsv);
-    }
-
-    /**
-     * 将颜色黑化50%
-     * @param color 原始颜色
-     * @return 黑化50%后的颜色
-     */
-    public static int darkenColor50Percent(int color) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        hsv[2] = hsv[2] * 0.9f; // 将亮度降低50%
         return Color.HSVToColor(hsv);
     }
 
@@ -192,9 +225,8 @@ public class AlbumColorHelper {
      * @return 渐变颜色数组 [darkenedTopColor50%, darkenedTopColor80%]
      */
     public static int[] createGradientColors(int topColor) {
-        int darkened50Percent = darkenColor50Percent(topColor);
         int darkened80Percent = darkenColor(topColor);
-        return new int[]{darkened50Percent, darkened80Percent};
+        return new int[]{topColor, darkened80Percent};
     }
 
     /**

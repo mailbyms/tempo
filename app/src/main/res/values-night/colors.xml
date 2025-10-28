@@ -9,5 +9,8 @@
 
     <color name="searchPlaceholderColor">#CFCFCF</color>
     <color name="searchColor">#DADADA</color>
+    
+    <!-- Player bitrate text colors -->
+    <color name="player_bitrate_text_color">#FFFFFF</color>
+    <color name="player_bitrate_shadow_color">#FF000000</color>
 </resources>
-

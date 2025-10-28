@@ -128,8 +128,6 @@ public class PlayerControllerFragment extends Fragment {
     }
 
     private void initQuickActionView() {
-        playerQuickActionView.setBackgroundColor(SurfaceColors.getColorForElevation(requireContext(), 8));
-
         playerOpenQueueButton.setOnClickListener(view -> {
             PlayerBottomSheetFragment playerBottomSheetFragment = (PlayerBottomSheetFragment) requireActivity().getSupportFragmentManager().findFragmentByTag("PlayerBottomSheet");
             if (playerBottomSheetFragment != null) {
@@ -443,5 +441,12 @@ public class PlayerControllerFragment extends Fragment {
         );
         gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
         rootLayout.setBackground(gradientDrawable);
+        
+        // 设置player_quick_action_view的颜色为渐变的结束颜色
+        if (colors.length > 1) {
+            playerQuickActionView.setBackgroundColor(colors[colors.length - 1]);
+        } else if (colors.length == 1) {
+            playerQuickActionView.setBackgroundColor(colors[0]);
+        }
     }
 }
