@@ -496,4 +496,9 @@ object Preferences {
                 LAST_INSTANT_MIX, 0
         ) + 5000 < System.currentTimeMillis()
     }
+
+    @JvmStatic
+    fun getTheme(): String {
+        return App.getInstance().preferences.getString(THEME, "default")!!
+    }
 }

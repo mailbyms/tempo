@@ -37,6 +37,9 @@ import com.cappielloantonio.tempo.util.Preferences;
 import com.cappielloantonio.tempo.util.UIUtil;
 import com.cappielloantonio.tempo.viewmodel.SettingViewModel;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import java.util.Locale;
 import java.util.Map;
 
@@ -116,6 +119,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     (preference, newValue) -> {
                         String themeOption = (String) newValue;
                         ThemeHelper.applyTheme(themeOption);
+
+                        // 通知播放器界面更新背景
+                        notifyPlayerBackgroundUpdate();
                         return true;
                     });
         }
@@ -323,5 +329,24 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
             return true;
         });
+    }
+
+    /**
+     * 通知播放器界面更新背景
+     */
+    private void notifyPlayerBackgroundUpdate() {
+        if (activity != null) {
+            // 通过FragmentManager找到PlayerControllerFragment并更新背景
+            FragmentManager fragmentManager = activity.getSupportFragmentManager();
+
+            // 查找PlayerBottomSheetFragment
+            Fragment playerBottomSheetFragment = fragmentManager.findFragmentByTag("PlayerBottomSheet");
+            if (playerBottomSheetFragment instanceof PlayerBottomSheetFragment) {
+                // PlayerBottomSheetFragment可能包含PlayerControllerFragment
+                // 这里我们使用一个广播机制或者事件总线来通知更新
+                // 简单起见，我们直接通过Application级别的事件来处理
+                ((MainActivity) activity).refreshPlayerBackground();
+            }
+        }
     }
 }

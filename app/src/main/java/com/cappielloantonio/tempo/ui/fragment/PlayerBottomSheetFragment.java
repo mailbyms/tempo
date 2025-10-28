@@ -308,4 +308,17 @@ public class PlayerBottomSheetFragment extends Fragment {
             }, Preferences.getSyncCountdownTimer() * 1000L);
         }
     }
+
+    /**
+     * 刷新播放器背景（在主题切换时调用）
+     */
+    public void refreshPlayerBackground() {
+        PlayerControllerVerticalPager playerControllerVerticalPager = (PlayerControllerVerticalPager) bind.playerBodyLayout.playerBodyBottomSheetViewPager.getAdapter();
+        if (playerControllerVerticalPager != null) {
+            PlayerControllerFragment playerControllerFragment = (PlayerControllerFragment) playerControllerVerticalPager.getRegisteredFragment(0);
+            if (playerControllerFragment != null) {
+                playerControllerFragment.initDefaultGradientBackground();
+            }
+        }
+    }
 }

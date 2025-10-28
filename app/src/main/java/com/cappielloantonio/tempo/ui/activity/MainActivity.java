@@ -11,6 +11,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.splashscreen.SplashScreen;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.media3.common.Player;
@@ -405,6 +406,17 @@ public class MainActivity extends BaseActivity {
                 ConnectionAlertDialog dialog = new ConnectionAlertDialog();
                 dialog.show(getSupportFragmentManager(), null);
             }
+        }
+    }
+
+    /**
+     * 刷新播放器背景（在主题切换时调用）
+     */
+    public void refreshPlayerBackground() {
+        Fragment playerBottomSheetFragment = getSupportFragmentManager().findFragmentByTag("PlayerBottomSheet");
+        if (playerBottomSheetFragment instanceof PlayerBottomSheetFragment) {
+            PlayerBottomSheetFragment bottomSheetFragment = (PlayerBottomSheetFragment) playerBottomSheetFragment;
+            bottomSheetFragment.refreshPlayerBackground();
         }
     }
 }

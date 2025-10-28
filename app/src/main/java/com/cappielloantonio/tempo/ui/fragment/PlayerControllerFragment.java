@@ -12,6 +12,7 @@ import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.media3.common.MediaMetadata;
@@ -26,6 +27,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.cappielloantonio.tempo.R;
 import com.cappielloantonio.tempo.databinding.InnerFragmentPlayerControllerBinding;
+import com.cappielloantonio.tempo.helper.AlbumColorHelper;
 import com.cappielloantonio.tempo.service.MediaService;
 import com.cappielloantonio.tempo.ui.activity.MainActivity;
 import com.cappielloantonio.tempo.ui.dialog.RatingDialog;
@@ -39,6 +41,9 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.elevation.SurfaceColors;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
+
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 
 import java.util.Objects;
 
@@ -62,6 +67,9 @@ public class PlayerControllerFragment extends Fragment {
     private MainActivity activity;
     private PlayerBottomSheetViewModel playerBottomSheetViewModel;
     private ListenableFuture<MediaBrowser> mediaBrowserListenableFuture;
+
+    // 渐变背景相关
+    private ConstraintLayout rootLayout;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,6 +110,7 @@ public class PlayerControllerFragment extends Fragment {
     }
 
     private void init() {
+        rootLayout = bind.getRoot().findViewById(R.id.now_playing_media_controller_layout);
         playerMediaCoverViewPager = bind.getRoot().findViewById(R.id.player_media_cover_view_pager);
         buttonFavorite = bind.getRoot().findViewById(R.id.button_favorite);
         playerMediaTitleLabel = bind.getRoot().findViewById(R.id.player_media_title_label);
@@ -113,6 +122,9 @@ public class PlayerControllerFragment extends Fragment {
         playerQuickActionView = bind.getRoot().findViewById(R.id.player_quick_action_view);
         playerOpenQueueButton = bind.getRoot().findViewById(R.id.player_open_queue_button);
         playerTrackInfo = bind.getRoot().findViewById(R.id.player_info_track);
+
+        // 初始化默认渐变背景
+        initDefaultGradientBackground();
     }
 
     private void initQuickActionView() {
@@ -152,6 +164,7 @@ public class PlayerControllerFragment extends Fragment {
         setMediaControllerUI(mediaBrowser);
         setMetadata(mediaBrowser.getMediaMetadata());
         setMediaInfo(mediaBrowser.getMediaMetadata());
+        updateGradientBackground(mediaBrowser.getMediaMetadata());
 
         mediaBrowser.addListener(new Player.Listener() {
             @Override
@@ -159,6 +172,7 @@ public class PlayerControllerFragment extends Fragment {
                 setMediaControllerUI(mediaBrowser);
                 setMetadata(mediaMetadata);
                 setMediaInfo(mediaMetadata);
+                updateGradientBackground(mediaMetadata);
             }
         });
     }
@@ -385,5 +399,49 @@ public class PlayerControllerFragment extends Fragment {
     private void resetPlaybackParameters(MediaBrowser mediaBrowser) {
         mediaBrowser.setPlaybackParameters(new PlaybackParameters(Constants.MEDIA_PLAYBACK_SPEED_100));
         // TODO Resettare lo skip del silenzio
+    }
+
+    /**
+     * 初始化默认渐变背景
+     */
+    public void initDefaultGradientBackground() {
+        int[] defaultGradientColors = AlbumColorHelper.createThemeBasedGradientColors(requireContext());
+        applyGradientBackground(defaultGradientColors);
+    }
+
+    /**
+     * 更新渐变背景
+     */
+    private void updateGradientBackground(MediaMetadata mediaMetadata) {
+        if (mediaMetadata == null || mediaMetadata.artworkUri == null) {
+            initDefaultGradientBackground();
+            return;
+        }
+
+        String coverUrl = mediaMetadata.artworkUri.toString();
+        AlbumColorHelper.extractAlbumColor(requireContext(), coverUrl, new AlbumColorHelper.ColorExtractionCallback() {
+            @Override
+            public void onColorExtracted(int dominantColor) {
+                int[] gradientColors = AlbumColorHelper.createGradientColors(dominantColor);
+                applyGradientBackground(gradientColors);
+            }
+
+            @Override
+            public void onColorExtractionFailed() {
+                initDefaultGradientBackground();
+            }
+        });
+    }
+
+    /**
+     * 应用渐变背景
+     */
+    private void applyGradientBackground(int[] colors) {
+        GradientDrawable gradientDrawable = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                colors
+        );
+        gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        rootLayout.setBackground(gradientDrawable);
     }
 }
