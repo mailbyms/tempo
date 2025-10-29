@@ -189,18 +189,18 @@ public class PlaylistPageFragment extends Fragment implements ClickCallback {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    // Music Button，限制播放列表 200 首歌曲
+    // Music Button，限制播放列表 100 首歌曲
     private void initMusicButton() {
         playlistPageViewModel.getPlaylistSongLiveList().observe(getViewLifecycleOwner(), songs -> {
             if (bind != null) {
                 bind.playlistPagePlayButton.setOnClickListener(v -> {
-                    MediaManager.startQueue(mediaBrowserListenableFuture, songs.subList(0, Math.min(200, songs.size())), 0);
+                    MediaManager.startQueue(mediaBrowserListenableFuture, songs.subList(0, Math.min(100, songs.size())), 0);
                     activity.setBottomSheetInPeek(true);
                 });
 
                 bind.playlistPageShuffleButton.setOnClickListener(v -> {
                     Collections.shuffle(songs);
-                    MediaManager.startQueue(mediaBrowserListenableFuture, songs.subList(0, Math.min(200, songs.size())), 0);
+                    MediaManager.startQueue(mediaBrowserListenableFuture, songs.subList(0, Math.min(100, songs.size())), 0);
                     activity.setBottomSheetInPeek(true);
                 });
             }

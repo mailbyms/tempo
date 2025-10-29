@@ -93,9 +93,9 @@ public class HomeViewModel extends AndroidViewModel {
         return dicoverSongSample;
     }
 
-    // 首面-发现-全部随机播放，从服务器随机获取200首歌曲
+    // 首面-发现-全部随机播放，从服务器随机获取100首歌曲
     public LiveData<List<Child>> getRandomShuffleSample() {
-        return songRepository.getRandomSample(200, null, null);
+        return songRepository.getRandomSample(100, null, null);
     }
 
     public LiveData<List<Chronology>> getChronologySample(LifecycleOwner owner) {
