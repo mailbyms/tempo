@@ -301,6 +301,21 @@ public class PlayerControllerFragment extends Fragment {
                     return true;
                 });
 
+                // 设置评论按钮点击事件
+                ImageButton buttonComment = bind.getRoot().findViewById(R.id.button_comment);
+                buttonComment.setOnClickListener(v -> {
+                    if (media != null && media.getId() != null) {
+                        SongCommentsFragment commentsFragment = SongCommentsFragment.newInstance(
+                            media.getId(),
+                            media.getTitle() != null ? media.getTitle() : "未知歌曲"
+                        );
+                        commentsFragment.show(
+                            requireActivity().getSupportFragmentManager(),
+                            "SongCommentsFragment"
+                        );
+                    }
+                });
+
                 if (getActivity() != null) {
                     playerBottomSheetViewModel.refreshMediaInfo(requireActivity(), media);
                 }

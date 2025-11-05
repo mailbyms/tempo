@@ -54,4 +54,5 @@ class SubsonicResponse {
     var openSubsonic: Boolean? = null
     var openSubsonicExtensions: List<OpenSubsonicExtension>? = null
     var lyricsList: LyricsList? = null
+    var songComments: SongComments? = null
 }
