@@ -118,7 +118,7 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_comment"
-        android:tint="?attr/colorOnPrimaryContainer"
+        app:tint="?attr/colorOnPrimaryContainer"
         app:layout_constraintBottom_toBottomOf="@+id/player_media_title_label"
         app:layout_constraintEnd_toStartOf="@+id/button_favorite"
         app:layout_constraintTop_toTopOf="@+id/player_media_title_label" />
