@@ -101,8 +101,9 @@ public class HistoryFragment extends Fragment implements ClickCallback {
         historyViewModel = new ViewModelProvider(requireActivity()).get(HistoryViewModel.class);
         chronologyRepository = new ChronologyRepository();
         historyViewModel.getChronologyLiveData(100).observe(getViewLifecycleOwner(), chronologies -> {
+            bind.loadingProgressBar.setVisibility(View.GONE);
+
             if (chronologies != null && !chronologies.isEmpty()) {
-                bind.loadingProgressBar.setVisibility(View.GONE);
                 bind.emptyHistoryLayout.setVisibility(View.GONE);
 
                 // Convert Chronology to Child for the adapter
@@ -112,8 +113,10 @@ public class HistoryFragment extends Fragment implements ClickCallback {
                 }
                 historyAdapter.setItems(childList);
             } else {
-                bind.loadingProgressBar.setVisibility(View.GONE);
                 bind.emptyHistoryLayout.setVisibility(View.VISIBLE);
+                if (historyAdapter != null) {
+                    historyAdapter.setItems(new ArrayList<>());
+                }
             }
         });
     }
