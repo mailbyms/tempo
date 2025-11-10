@@ -78,6 +78,12 @@
     <string name="download_storage_external_dialog_positive_button">External</string>
     <string name="download_storage_internal_dialog_negative_button">Internal</string>
     <string name="download_title_section">Downloads</string>
+    <string name="history_title_section">History</string>
+    <string name="history_title_recent">Recently Played</string>
+    <string name="history_subtitle_recent">Last 100 songs</string>
+    <string name="history_info_empty_title">No history yet!</string>
+    <string name="history_info_empty_subtitle">Your recently played songs will appear here</string>
+    <string name="history_clear_all_button">Clear history</string>
     <string name="downloaded_bottom_sheet_add_to_queue">Add to queue</string>
     <string name="downloaded_bottom_sheet_play_next">Play next</string>
     <string name="downloaded_bottom_sheet_remove">Remove</string>
@@ -160,6 +166,7 @@
     <string name="menu_add_button">Add</string>
     <string name="menu_download_all_button">Download all</string>
     <string name="menu_download_label">Download</string>
+    <string name="menu_history_label">History</string>
     <string name="menu_filter_all">All</string>
     <string name="menu_filter_download">Downloaded</string>
     <string name="menu_group_by_album">Album</string>

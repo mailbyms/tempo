@@ -99,6 +99,11 @@ class MediaService : MediaLibraryService() {
                 if (reason == Player.MEDIA_ITEM_TRANSITION_REASON_SEEK || reason == Player.MEDIA_ITEM_TRANSITION_REASON_AUTO) {
                     MediaManager.setLastPlayedTimestamp(mediaItem)
                 }
+
+                // 记录播放历史：当歌曲开始播放时
+                if (mediaItem.mediaMetadata.extras?.getString("type") == Constants.MEDIA_TYPE_MUSIC) {
+                    MediaManager.saveChronology(mediaItem)
+                }
             }
 
             override fun onTracksChanged(tracks: Tracks) {
@@ -128,7 +133,7 @@ class MediaService : MediaLibraryService() {
                         player.mediaMetadata.extras?.getString("type") == Constants.MEDIA_TYPE_MUSIC
                 ) {
                     MediaManager.scrobble(player.currentMediaItem, true)
-                    MediaManager.saveChronology(player.currentMediaItem)
+                    // 移除播放完成时的历史记录 - 改为在歌曲开始播放时记录
                 }
             }
 

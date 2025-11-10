@@ -23,7 +23,7 @@
             app:title="@string/settings_language"/>
 
         <ListPreference
-            app:defaultValue="default"
+            app:defaultValue="dark"
             app:dialogTitle="@string/settings_theme"
             app:entries="@array/theme_list_titles"
             app:entryValues="@array/theme_list_values"
@@ -65,19 +65,19 @@
 
         <SwitchPreference
             android:title="@string/settings_podcast"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:summary="@string/settings_podcast_summary"
             android:key="podcast_section_visibility" />
 
         <SwitchPreference
             android:title="@string/settings_radio"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:summary="@string/settings_radio_summary"
             android:key="radio_section_visibility" />
 
         <SwitchPreference
             android:title="@string/settings_music_directory"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:summary="@string/settings_music_directory_summary"
             android:key="music_directory_section_visibility" />
     </PreferenceCategory>

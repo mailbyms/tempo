@@ -138,7 +138,13 @@
     <string name="media_route_menu_title">投送</string>
     <string name="menu_add_button">添加</string>
     <string name="menu_download_all_button">全部下载</string>
-    <string name="menu_download_label">下载</string>
+    <string name="menu_history_label">历史</string>
+    <string name="history_title_section">历史</string>
+    <string name="history_title_recent">最近播放</string>
+    <string name="history_subtitle_recent">最近100首歌曲</string>
+    <string name="history_info_empty_title">暂无历史记录！</string>
+    <string name="history_info_empty_subtitle">您最近播放的歌曲将显示在这里</string>
+    <string name="history_clear_all_button">清空历史</string>
     <string name="menu_filter_all">全部</string>
     <string name="menu_filter_download">已下载</string>
     <string name="menu_group_by_album">专辑</string>

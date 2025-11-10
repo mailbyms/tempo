@@ -134,7 +134,13 @@
     <string name="media_route_menu_title">Cast</string>
     <string name="menu_add_button">Ajouter</string>
     <string name="menu_download_all_button">Télécharger tout</string>
-    <string name="menu_download_label">Téléchargé</string>
+    <string name="menu_history_label">Historique</string>
+    <string name="history_title_section">Historique</string>
+    <string name="history_title_recent">Lus récemment</string>
+    <string name="history_subtitle_recent">Les 100 dernières chansons</string>
+    <string name="history_info_empty_title">Aucun historique pour le moment !</string>
+    <string name="history_info_empty_subtitle">Vos chansons récemment écoutées apparaîtront ici</string>
+    <string name="history_clear_all_button">Effacer l\'historique</string>
     <string name="menu_filter_all">Tout</string>
     <string name="menu_filter_download">Téléchargé</string>
     <string name="menu_group_by_album">Album</string>

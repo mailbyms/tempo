@@ -155,7 +155,13 @@
     <string name="media_route_menu_title">Cast</string>
     <string name="menu_add_button">Hinzufügen</string>
     <string name="menu_download_all_button">Alle Herunterladen</string>
-    <string name="menu_download_label">Downloads</string>
+    <string name="menu_history_label">Verlauf</string>
+    <string name="history_title_section">Verlauf</string>
+    <string name="history_title_recent">Kürzlich gehört</string>
+    <string name="history_subtitle_recent">Die letzten 100 Songs</string>
+    <string name="history_info_empty_title">Noch kein Verlauf!</string>
+    <string name="history_info_empty_subtitle">Deine kürzlich gehörten Songs erscheinen hier</string>
+    <string name="history_clear_all_button">Verlauf löschen</string>
     <string name="menu_filter_all">Alle</string>
     <string name="menu_filter_download">Heruntergeladen</string>
     <string name="menu_group_by_album">Album</string>

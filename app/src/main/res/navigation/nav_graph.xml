@@ -112,33 +112,33 @@
             app:destination="@id/indexFragment" />
     </fragment>
     <fragment
-        android:id="@+id/downloadFragment"
-        android:name="com.cappielloantonio.tempo.ui.fragment.DownloadFragment"
-        android:label="DownloadFragment"
-        tools:layout="@layout/fragment_download">
+        android:id="@+id/historyFragment"
+        android:name="com.cappielloantonio.tempo.ui.fragment.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history">
         <action
-            android:id="@+id/action_downloadFragment_to_songListPageFragment"
+            android:id="@+id/action_historyFragment_to_songListPageFragment"
             app:destination="@id/songListPageFragment" />
         <action
-            android:id="@+id/action_downloadFragment_to_albumPageFragment"
+            android:id="@+id/action_historyFragment_to_albumPageFragment"
             app:destination="@id/albumPageFragment" />
         <action
-            android:id="@+id/action_downloadFragment_to_albumListPageFragment"
+            android:id="@+id/action_historyFragment_to_albumListPageFragment"
             app:destination="@id/albumListPageFragment" />
         <action
-            android:id="@+id/action_downloadFragment_to_artistListPageFragment"
+            android:id="@+id/action_historyFragment_to_artistListPageFragment"
             app:destination="@id/artistListPageFragment" />
         <action
-            android:id="@+id/action_downloadFragment_to_settingsFragment"
+            android:id="@+id/action_historyFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action
-            android:id="@+id/action_downloadFragment_to_searchFragment"
+            android:id="@+id/action_historyFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
         <action
-            android:id="@+id/action_downloadFragment_to_playlistPageFragment"
+            android:id="@+id/action_historyFragment_to_playlistPageFragment"
             app:destination="@id/playlistPageFragment" />
         <action
-            android:id="@+id/action_downloadFragment_to_playlistCatalogueFragment"
+            android:id="@+id/action_historyFragment_to_playlistCatalogueFragment"
             app:destination="@id/playlistCatalogueFragment" />
     </fragment>
     <fragment

@@ -499,6 +499,21 @@ object Preferences {
 
     @JvmStatic
     fun getTheme(): String {
-        return App.getInstance().preferences.getString(THEME, "default")!!
+        return App.getInstance().preferences.getString(THEME, "dark")!!
+    }
+
+    @JvmStatic
+    fun showPodcastSection(): Boolean {
+        return App.getInstance().preferences.getBoolean(PODCAST_SECTION_VISIBILITY, false)
+    }
+
+    @JvmStatic
+    fun showRadioSection(): Boolean {
+        return App.getInstance().preferences.getBoolean(RADIO_SECTION_VISIBILITY, false)
+    }
+
+    @JvmStatic
+    fun showMusicDirectorySection(): Boolean {
+        return App.getInstance().preferences.getBoolean(MUSIC_DIRECTORY_SECTION_VISIBILITY, false)
     }
 }
