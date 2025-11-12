@@ -14,7 +14,6 @@ import androidx.room.PrimaryKey
 import com.cappielloantonio.tempo.glide.CustomGlideRequest
 import com.cappielloantonio.tempo.subsonic.models.Child
 import com.cappielloantonio.tempo.subsonic.models.InternetRadioStation
-import com.cappielloantonio.tempo.subsonic.models.PodcastEpisode
 import com.cappielloantonio.tempo.util.Constants
 import com.cappielloantonio.tempo.util.MusicUtil
 import com.cappielloantonio.tempo.util.Preferences.getImageSize
@@ -168,28 +167,6 @@ class SessionMediaItem() {
         bpm = child.bpm
     }
 
-    constructor(podcastEpisode: PodcastEpisode) : this() {
-        id = podcastEpisode.id
-        parentId = podcastEpisode.parentId
-        isDir = podcastEpisode.isDir
-        title = podcastEpisode.title
-        album = podcastEpisode.album
-        artist = podcastEpisode.artist
-        year = podcastEpisode.year
-        genre = podcastEpisode.genre
-        coverArtId = podcastEpisode.coverArtId
-        size = podcastEpisode.size
-        contentType = podcastEpisode.contentType
-        suffix = podcastEpisode.suffix
-        duration = podcastEpisode.duration
-        bitrate = podcastEpisode.bitrate
-        path = podcastEpisode.path
-        isVideo = podcastEpisode.isVideo
-        created = podcastEpisode.created
-        artistId = podcastEpisode.artistId
-        streamId = podcastEpisode.streamId
-        type = Constants.MEDIA_TYPE_PODCAST
-    }
 
     constructor(internetRadioStation: InternetRadioStation) : this() {
         id = internetRadioStation.id
@@ -270,9 +247,6 @@ class SessionMediaItem() {
                 MusicUtil.getStreamUri(id)
             }
 
-            Constants.MEDIA_TYPE_PODCAST -> {
-                MusicUtil.getStreamUri(streamId)
-            }
 
             Constants.MEDIA_TYPE_RADIO -> {
                 Uri.parse(streamUrl)

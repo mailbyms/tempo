@@ -33,7 +33,6 @@ import com.cappielloantonio.tempo.subsonic.models.Index;
 import com.cappielloantonio.tempo.subsonic.models.InternetRadioStation;
 import com.cappielloantonio.tempo.subsonic.models.MusicFolder;
 import com.cappielloantonio.tempo.subsonic.models.Playlist;
-import com.cappielloantonio.tempo.subsonic.models.PodcastEpisode;
 import com.cappielloantonio.tempo.util.DownloadUtil;
 import com.cappielloantonio.tempo.util.MappingUtil;
 import com.cappielloantonio.tempo.util.MusicUtil;
@@ -535,58 +534,6 @@ public class AutomotiveRepository {
         return listenableFuture;
     }
 
-    public ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> getNewestPodcastEpisodes(int count) {
-        final SettableFuture<LibraryResult<ImmutableList<MediaItem>>> listenableFuture = SettableFuture.create();
-
-        App.getSubsonicClientInstance(false)
-                .getPodcastClient()
-                .getNewestPodcasts(count)
-                .enqueue(new Callback<ApiResponse>() {
-                    @Override
-                    public void onResponse(@NonNull Call<ApiResponse> call, @NonNull Response<ApiResponse> response) {
-                        if (response.isSuccessful() && response.body() != null && response.body().getSubsonicResponse().getNewestPodcasts() != null && response.body().getSubsonicResponse().getNewestPodcasts().getEpisodes() != null) {
-                            List<PodcastEpisode> episodes = response.body().getSubsonicResponse().getNewestPodcasts().getEpisodes();
-
-                            List<MediaItem> mediaItems = new ArrayList<>();
-
-                            for (PodcastEpisode episode : episodes) {
-                                Uri artworkUri = Uri.parse(CustomGlideRequest.createUrl(episode.getCoverArtId(), Preferences.getImageSize()));
-
-                                MediaMetadata mediaMetadata = new MediaMetadata.Builder()
-                                        .setTitle(episode.getTitle())
-                                        .setIsBrowsable(false)
-                                        .setIsPlayable(true)
-                                        .setMediaType(MediaMetadata.MEDIA_TYPE_PODCAST_EPISODE)
-                                        .setArtworkUri(artworkUri)
-                                        .build();
-
-                                MediaItem mediaItem = new MediaItem.Builder()
-                                        .setMediaId(episode.getId())
-                                        .setMediaMetadata(mediaMetadata)
-                                        .setUri(MusicUtil.getStreamUri(episode.getStreamId()))
-                                        .build();
-
-                                mediaItems.add(mediaItem);
-                            }
-
-                            setPodcastEpisodesMetadata(episodes);
-
-                            LibraryResult<ImmutableList<MediaItem>> libraryResult = LibraryResult.ofItemList(ImmutableList.copyOf(mediaItems), null);
-
-                            listenableFuture.set(libraryResult);
-                        } else {
-                            listenableFuture.set(LibraryResult.ofError(LibraryResult.RESULT_ERROR_BAD_VALUE));
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<ApiResponse> call, @NonNull Throwable t) {
-                        listenableFuture.setException(t);
-                    }
-                });
-
-        return listenableFuture;
-    }
 
     public ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> getInternetRadioStations() {
         final SettableFuture<LibraryResult<ImmutableList<MediaItem>>> listenableFuture = SettableFuture.create();
@@ -882,21 +829,6 @@ public class AutomotiveRepository {
         thread.start();
     }
 
-    @OptIn(markerClass = UnstableApi.class)
-    public void setPodcastEpisodesMetadata(List<PodcastEpisode> podcastEpisodes) {
-        long timestamp = System.currentTimeMillis();
-        ArrayList<SessionMediaItem> sessionMediaItems = new ArrayList<>();
-
-        for (PodcastEpisode podcastEpisode : podcastEpisodes) {
-            SessionMediaItem sessionMediaItem = new SessionMediaItem(podcastEpisode);
-            sessionMediaItem.setTimestamp(timestamp);
-            sessionMediaItems.add(sessionMediaItem);
-        }
-
-        InsertAllThreadSafe insertAll = new InsertAllThreadSafe(sessionMediaItemDao, sessionMediaItems);
-        Thread thread = new Thread(insertAll);
-        thread.start();
-    }
 
     @OptIn(markerClass = UnstableApi.class)
     public void setInternetRadioStationsMetadata(List<InternetRadioStation> internetRadioStations) {

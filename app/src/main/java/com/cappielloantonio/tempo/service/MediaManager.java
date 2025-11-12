@@ -18,7 +18,6 @@ import com.cappielloantonio.tempo.repository.QueueRepository;
 import com.cappielloantonio.tempo.repository.SongRepository;
 import com.cappielloantonio.tempo.subsonic.models.Child;
 import com.cappielloantonio.tempo.subsonic.models.InternetRadioStation;
-import com.cappielloantonio.tempo.subsonic.models.PodcastEpisode;
 import com.cappielloantonio.tempo.util.MappingUtil;
 import com.cappielloantonio.tempo.util.Preferences;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -156,22 +155,6 @@ public class MediaManager {
         }
     }
 
-    public static void startPodcast(ListenableFuture<MediaBrowser> mediaBrowserListenableFuture, PodcastEpisode podcastEpisode) {
-        if (mediaBrowserListenableFuture != null) {
-            mediaBrowserListenableFuture.addListener(() -> {
-                try {
-                    if (mediaBrowserListenableFuture.isDone()) {
-                        mediaBrowserListenableFuture.get().clearMediaItems();
-                        mediaBrowserListenableFuture.get().setMediaItem(MappingUtil.mapMediaItem(podcastEpisode));
-                        mediaBrowserListenableFuture.get().prepare();
-                        mediaBrowserListenableFuture.get().play();
-                    }
-                } catch (ExecutionException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }, MoreExecutors.directExecutor());
-        }
-    }
 
     public static void enqueue(ListenableFuture<MediaBrowser> mediaBrowserListenableFuture, List<Child> media, boolean playImmediatelyAfter) {
         if (mediaBrowserListenableFuture != null) {

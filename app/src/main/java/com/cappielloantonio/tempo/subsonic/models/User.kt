@@ -17,7 +17,6 @@ class User {
     var isPlaylistRole = false
     var isCoverArtRole = false
     var isCommentRole = false
-    var isPodcastRole = false
     var isStreamRole = false
     var isJukeboxRole = false
     var isShareRole = false

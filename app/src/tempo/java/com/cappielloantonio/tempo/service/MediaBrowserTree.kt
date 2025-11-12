@@ -47,7 +47,6 @@ object MediaBrowserTree {
     private const val PLAYLIST_ID = "[playlistID]"
 
     // Second level OTHER_ID
-    private const val PODCAST_ID = "[podcastID]"
     private const val RADIO_ID = "[radioID]"
 
     private const val ALBUM_ID = "[albumID]"
@@ -302,16 +301,6 @@ object MediaBrowserTree {
 
         // Second level OTHER_ID
 
-        treeNodes[PODCAST_ID] =
-            MediaItemNode(
-                buildMediaItem(
-                    title = "Podcasts",
-                    mediaId = PODCAST_ID,
-                    isPlayable = false,
-                    isBrowsable = true,
-                    mediaType = MediaMetadata.MEDIA_TYPE_FOLDER_PODCASTS
-                )
-            )
 
         treeNodes[RADIO_ID] =
             MediaItemNode(
@@ -324,7 +313,6 @@ object MediaBrowserTree {
                 )
             )
 
-        treeNodes[OTHER_ID]!!.addChild(PODCAST_ID)
         treeNodes[OTHER_ID]!!.addChild(RADIO_ID)
     }
 
@@ -353,7 +341,6 @@ object MediaBrowserTree {
             RANDOM_ID -> automotiveRepository.getRandomSongs(100)
             FOLDER_ID -> automotiveRepository.getMusicFolders(id)
             PLAYLIST_ID -> automotiveRepository.getPlaylists(id)
-            PODCAST_ID -> automotiveRepository.getNewestPodcastEpisodes(100)
             RADIO_ID -> automotiveRepository.internetRadioStations
 
             else -> {

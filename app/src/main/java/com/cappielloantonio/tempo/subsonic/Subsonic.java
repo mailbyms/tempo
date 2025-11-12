@@ -9,7 +9,6 @@ import com.cappielloantonio.tempo.subsonic.api.medialibraryscanning.MediaLibrary
 import com.cappielloantonio.tempo.subsonic.api.mediaretrieval.MediaRetrievalClient;
 import com.cappielloantonio.tempo.subsonic.api.open.OpenClient;
 import com.cappielloantonio.tempo.subsonic.api.playlist.PlaylistClient;
-import com.cappielloantonio.tempo.subsonic.api.podcast.PodcastClient;
 import com.cappielloantonio.tempo.subsonic.api.searching.SearchingClient;
 import com.cappielloantonio.tempo.subsonic.api.sharing.SharingClient;
 import com.cappielloantonio.tempo.subsonic.api.system.SystemClient;
@@ -31,7 +30,6 @@ public class Subsonic {
     private SearchingClient searchingClient;
     private AlbumSongListClient albumSongListClient;
     private MediaAnnotationClient mediaAnnotationClient;
-    private PodcastClient podcastClient;
     private MediaLibraryScanningClient mediaLibraryScanningClient;
     private BookmarksClient bookmarksClient;
     private InternetRadioClient internetRadioClient;
@@ -95,12 +93,6 @@ public class Subsonic {
         return mediaAnnotationClient;
     }
 
-    public PodcastClient getPodcastClient() {
-        if (podcastClient == null) {
-            podcastClient = new PodcastClient(this);
-        }
-        return podcastClient;
-    }
 
     public MediaLibraryScanningClient getMediaLibraryScanningClient() {
         if (mediaLibraryScanningClient == null) {

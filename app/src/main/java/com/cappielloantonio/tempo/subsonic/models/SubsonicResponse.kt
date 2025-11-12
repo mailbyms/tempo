@@ -18,8 +18,6 @@ class SubsonicResponse {
     var playQueue: PlayQueue? = null
     var bookmarks: Bookmarks? = null
     var internetRadioStations: InternetRadioStations? = null
-    var newestPodcasts: NewestPodcasts? = null
-    var podcasts: Podcasts? = null
     var lyrics: Lyrics? = null
     var songsByGenre: Songs? = null
     var randomSongs: Songs? = null

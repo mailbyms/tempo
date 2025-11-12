@@ -63,11 +63,6 @@
             android:summary="@string/settings_item_rating_summary"
             android:key="rating_per_item" />
 
-        <SwitchPreference
-            android:title="@string/settings_podcast"
-            android:defaultValue="false"
-            android:summary="@string/settings_podcast_summary"
-            android:key="podcast_section_visibility" />
 
         <SwitchPreference
             android:title="@string/settings_radio"

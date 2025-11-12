@@ -65,9 +65,6 @@
         <action
             android:id="@+id/action_homeFragment_to_playlistPageFragment"
             app:destination="@id/playlistPageFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_podcastChannelCatalogueFragment"
-            app:destination="@id/podcastChannelCatalogueFragment" />
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
@@ -269,20 +266,6 @@
         android:label="PlaylistPageFragment"
         tools:layout="@layout/fragment_playlist_page" />
     <fragment
-        android:id="@+id/podcastChannelCatalogueFragment"
-        android:name="com.cappielloantonio.tempo.ui.fragment.PodcastChannelCatalogueFragment"
-        android:label="PodcastChannelCatalogueFragment"
-        tools:layout="@layout/fragment_podcast_channel_catalogue">
-        <action
-            android:id="@+id/action_podcastChannelCatalogueFragment_to_podcastChannelPageFragment"
-            app:destination="@id/podcastChannelPageFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/podcastChannelPageFragment"
-        android:name="com.cappielloantonio.tempo.ui.fragment.PodcastChannelPageFragment"
-        android:label="PodcastChannelPageFragment"
-        tools:layout="@layout/fragment_podcast_channel_page" />
-    <fragment
         android:id="@+id/directoryFragment"
         android:name="com.cappielloantonio.tempo.ui.fragment.DirectoryFragment"
         android:label="DirectoryFragment"
@@ -320,16 +303,6 @@
         android:name="com.cappielloantonio.tempo.ui.fragment.bottomsheetdialog.DownloadedBottomSheetDialog"
         android:label="DownloadBottomSheetDialog"
         tools:layout="@layout/bottom_sheet_downloaded_dialog" />
-    <dialog
-        android:id="@+id/podcastEpisodeBottomSheetDialog"
-        android:name="com.cappielloantonio.tempo.ui.fragment.bottomsheetdialog.PodcastEpisodeBottomSheetDialog"
-        android:label="PodcastEpisodeBottomSheetDialog"
-        tools:layout="@layout/bottom_sheet_podcast_episode_dialog" />
-    <dialog
-        android:id="@+id/podcastChannelBottomSheetDialog"
-        android:name="com.cappielloantonio.tempo.ui.fragment.bottomsheetdialog.PodcastChannelBottomSheetDialog"
-        android:label="PodcastChannelBottomSheetDialog"
-        tools:layout="@layout/bottom_sheet_podcast_channel_dialog" />
     <dialog
         android:id="@+id/shareBottomSheetDialog"
         android:name="com.cappielloantonio.tempo.ui.fragment.bottomsheetdialog.ShareBottomSheetDialog"

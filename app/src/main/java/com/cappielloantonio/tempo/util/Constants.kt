@@ -11,8 +11,6 @@ object Constants {
     const val ARTIST_OBJECT = "ARTIST_OBJECT"
     const val GENRE_OBJECT = "GENRE_OBJECT"
     const val PLAYLIST_OBJECT = "PLAYLIST_OBJECT"
-    const val PODCAST_OBJECT = "PODCAST_OBJECT"
-    const val PODCAST_CHANNEL_OBJECT = "PODCAST_CHANNEL_OBJECT"
     const val INTERNET_RADIO_STATION_OBJECT = "INTERNET_RADIO_STATION_OBJECT"
     const val MUSIC_FOLDER_OBJECT = "MUSIC_FOLDER_OBJECT"
     const val MUSIC_DIRECTORY_OBJECT = "MUSIC_DIRECTORY_OBJECT"
@@ -51,11 +49,8 @@ object Constants {
     const val PLAYLIST_ORDER_BY_NAME = "ORDER_BY_NAME"
     const val PLAYLIST_ORDER_BY_RANDOM = "ORDER_BY_RANDOM"
 
-    const val PODCAST_FILTER_BY_DOWNLOAD = "PODCAST_FILTER_BY_DOWNLOAD"
-    const val PODCAST_FILTER_BY_ALL = "PODCAST_FILTER_BY_ALL"
 
     const val MEDIA_TYPE_MUSIC = "music"
-    const val MEDIA_TYPE_PODCAST = "podcast"
     const val MEDIA_TYPE_AUDIOBOOK = "audiobook"
     const val MEDIA_TYPE_VIDEO = "video"
     const val MEDIA_TYPE_RADIO = "radio"

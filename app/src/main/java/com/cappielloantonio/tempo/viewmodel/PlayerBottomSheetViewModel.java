@@ -160,9 +160,6 @@ public class PlayerBottomSheetViewModel extends AndroidViewModel {
                     songRepository.getSong(mediaId).observe(owner, liveMedia::postValue);
                     descriptionLiveData.postValue(null);
                     break;
-                case Constants.MEDIA_TYPE_PODCAST:
-                    liveMedia.postValue(null);
-                    break;
             }
         }
     }
@@ -177,9 +174,6 @@ public class PlayerBottomSheetViewModel extends AndroidViewModel {
                 case Constants.MEDIA_TYPE_MUSIC:
                     albumRepository.getAlbum(AlbumId).observe(owner, liveAlbum::postValue);
                     break;
-                case Constants.MEDIA_TYPE_PODCAST:
-                    liveAlbum.postValue(null);
-                    break;
             }
         }
     }
@@ -193,9 +187,6 @@ public class PlayerBottomSheetViewModel extends AndroidViewModel {
             switch (mediaType) {
                 case Constants.MEDIA_TYPE_MUSIC:
                     artistRepository.getArtist(ArtistId).observe(owner, liveArtist::postValue);
-                    break;
-                case Constants.MEDIA_TYPE_PODCAST:
-                    liveArtist.postValue(null);
                     break;
             }
         }
