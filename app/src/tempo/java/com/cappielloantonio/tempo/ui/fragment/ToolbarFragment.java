@@ -16,7 +16,6 @@ import androidx.media3.common.util.UnstableApi;
 import com.cappielloantonio.tempo.R;
 import com.cappielloantonio.tempo.databinding.FragmentToolbarBinding;
 import com.cappielloantonio.tempo.ui.activity.MainActivity;
-import com.google.android.gms.cast.framework.CastButtonFactory;
 
 @UnstableApi
 public class ToolbarFragment extends Fragment {
@@ -39,7 +38,6 @@ public class ToolbarFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.main_page_menu, menu);
-        CastButtonFactory.setUpMediaRouteButton(requireContext(), menu, R.id.media_route_menu_item);
     }
 
     @Override
