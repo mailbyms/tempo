@@ -83,11 +83,9 @@ public class HomeFragment extends Fragment {
         pager.addFragment(new HomeTabMusicFragment(), "Music", R.drawable.ic_home);
 
 
-        if (Preferences.isRadioSectionVisible())
-            pager.addFragment(new HomeTabRadioFragment(), "Radio", R.drawable.ic_play_for_work);
 
         bind.homeViewPager.setAdapter(pager);
-        bind.homeViewPager.setOffscreenPageLimit(2);
+        bind.homeViewPager.setOffscreenPageLimit(1);
         bind.homeViewPager.setUserInputEnabled(false);
 
         new TabLayoutMediator(tabLayout, bind.homeViewPager,
@@ -97,6 +95,6 @@ public class HomeFragment extends Fragment {
                 }
         ).attach();
 
-        tabLayout.setVisibility(Preferences.isRadioSectionVisible() ? View.VISIBLE : View.GONE);
+        tabLayout.setVisibility(View.GONE);
     }
 }

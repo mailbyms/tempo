@@ -64,11 +64,6 @@
             android:key="rating_per_item" />
 
 
-        <SwitchPreference
-            android:title="@string/settings_radio"
-            android:defaultValue="false"
-            android:summary="@string/settings_radio_summary"
-            android:key="radio_section_visibility" />
 
         <SwitchPreference
             android:title="@string/settings_music_directory"

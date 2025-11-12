@@ -13,7 +13,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.cappielloantonio.tempo.glide.CustomGlideRequest
 import com.cappielloantonio.tempo.subsonic.models.Child
-import com.cappielloantonio.tempo.subsonic.models.InternetRadioStation
 import com.cappielloantonio.tempo.util.Constants
 import com.cappielloantonio.tempo.util.MusicUtil
 import com.cappielloantonio.tempo.util.Preferences.getImageSize
@@ -168,12 +167,6 @@ class SessionMediaItem() {
     }
 
 
-    constructor(internetRadioStation: InternetRadioStation) : this() {
-        id = internetRadioStation.id
-        title = internetRadioStation.name
-        streamUrl = internetRadioStation.streamUrl
-        type = Constants.MEDIA_TYPE_RADIO
-    }
 
     fun getMediaItem(): MediaItem {
         val uri: Uri = getStreamUri()
@@ -245,11 +238,6 @@ class SessionMediaItem() {
         return when (type) {
             Constants.MEDIA_TYPE_MUSIC -> {
                 MusicUtil.getStreamUri(id)
-            }
-
-
-            Constants.MEDIA_TYPE_RADIO -> {
-                Uri.parse(streamUrl)
             }
 
             else -> {

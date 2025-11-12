@@ -30,7 +30,6 @@ import com.cappielloantonio.tempo.subsonic.models.ArtistID3;
 import com.cappielloantonio.tempo.subsonic.models.Child;
 import com.cappielloantonio.tempo.subsonic.models.Directory;
 import com.cappielloantonio.tempo.subsonic.models.Index;
-import com.cappielloantonio.tempo.subsonic.models.InternetRadioStation;
 import com.cappielloantonio.tempo.subsonic.models.MusicFolder;
 import com.cappielloantonio.tempo.subsonic.models.Playlist;
 import com.cappielloantonio.tempo.util.DownloadUtil;
@@ -535,56 +534,6 @@ public class AutomotiveRepository {
     }
 
 
-    public ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> getInternetRadioStations() {
-        final SettableFuture<LibraryResult<ImmutableList<MediaItem>>> listenableFuture = SettableFuture.create();
-
-        App.getSubsonicClientInstance(false)
-                .getInternetRadioClient()
-                .getInternetRadioStations()
-                .enqueue(new Callback<ApiResponse>() {
-                    @Override
-                    public void onResponse(@NonNull Call<ApiResponse> call, @NonNull Response<ApiResponse> response) {
-                        if (response.isSuccessful() && response.body() != null && response.body().getSubsonicResponse().getInternetRadioStations() != null && response.body().getSubsonicResponse().getInternetRadioStations().getInternetRadioStations() != null) {
-
-                            List<InternetRadioStation> radioStations = response.body().getSubsonicResponse().getInternetRadioStations().getInternetRadioStations();
-
-                            List<MediaItem> mediaItems = new ArrayList<>();
-
-                            for (InternetRadioStation radioStation : radioStations) {
-                                MediaMetadata mediaMetadata = new MediaMetadata.Builder()
-                                        .setTitle(radioStation.getName())
-                                        .setIsBrowsable(false)
-                                        .setIsPlayable(true)
-                                        .setMediaType(MediaMetadata.MEDIA_TYPE_RADIO_STATION)
-                                        .build();
-
-                                MediaItem mediaItem = new MediaItem.Builder()
-                                        .setMediaId(radioStation.getId())
-                                        .setMediaMetadata(mediaMetadata)
-                                        .setUri(radioStation.getStreamUrl())
-                                        .build();
-
-                                mediaItems.add(mediaItem);
-                            }
-
-                            setInternetRadioStationsMetadata(radioStations);
-
-                            LibraryResult<ImmutableList<MediaItem>> libraryResult = LibraryResult.ofItemList(ImmutableList.copyOf(mediaItems), null);
-
-                            listenableFuture.set(libraryResult);
-                        } else {
-                            listenableFuture.set(LibraryResult.ofError(LibraryResult.RESULT_ERROR_BAD_VALUE));
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<ApiResponse> call, @NonNull Throwable t) {
-                        listenableFuture.setException(t);
-                    }
-                });
-
-        return listenableFuture;
-    }
 
     public ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> getAlbumTracks(String id) {
         final SettableFuture<LibraryResult<ImmutableList<MediaItem>>> listenableFuture = SettableFuture.create();
@@ -830,21 +779,6 @@ public class AutomotiveRepository {
     }
 
 
-    @OptIn(markerClass = UnstableApi.class)
-    public void setInternetRadioStationsMetadata(List<InternetRadioStation> internetRadioStations) {
-        long timestamp = System.currentTimeMillis();
-        ArrayList<SessionMediaItem> sessionMediaItems = new ArrayList<>();
-
-        for (InternetRadioStation internetRadioStation : internetRadioStations) {
-            SessionMediaItem sessionMediaItem = new SessionMediaItem(internetRadioStation);
-            sessionMediaItem.setTimestamp(timestamp);
-            sessionMediaItems.add(sessionMediaItem);
-        }
-
-        InsertAllThreadSafe insertAll = new InsertAllThreadSafe(sessionMediaItemDao, sessionMediaItems);
-        Thread thread = new Thread(insertAll);
-        thread.start();
-    }
 
     public SessionMediaItem getSessionMediaItem(String id) {
         SessionMediaItem sessionMediaItem = null;

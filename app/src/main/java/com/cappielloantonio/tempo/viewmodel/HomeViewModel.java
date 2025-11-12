@@ -294,7 +294,7 @@ public class HomeViewModel extends AndroidViewModel {
         songRepository.getStarredSongs(true, 10).observe(owner, starredTracksSample::postValue);
     }
 
-    public void refreshRadioArtistSample(LifecycleOwner owner) {
+    public void refreshStarredArtistsSample(LifecycleOwner owner) {
         artistRepository.getStarredArtists(true, 10).observe(owner, starredArtistsSample::postValue);
     }
 

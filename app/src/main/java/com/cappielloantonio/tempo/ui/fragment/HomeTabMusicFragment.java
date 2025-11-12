@@ -76,7 +76,6 @@ public class HomeTabMusicFragment extends Fragment implements ClickCallback {
 
     private DiscoverSongAdapter discoverSongAdapter;
     private SimilarTrackAdapter similarMusicAdapter;
-    private ArtistAdapter radioArtistAdapter;
     private ArtistAdapter bestOfArtistAdapter;
     private SongHorizontalAdapter starredSongAdapter;
     private SongHorizontalAdapter topSongAdapter;
@@ -113,7 +112,6 @@ public class HomeTabMusicFragment extends Fragment implements ClickCallback {
         initSyncStarredView();
         initDiscoverSongSlideView();
         initSimilarSongView();
-        initArtistRadio();
         initArtistBestOf();
         initStarredTracksView();
         initStarredAlbumsView();
@@ -180,10 +178,6 @@ public class HomeTabMusicFragment extends Fragment implements ClickCallback {
             return true;
         });
 
-        bind.radioArtistTextViewRefreshable.setOnLongClickListener(v -> {
-            homeViewModel.refreshRadioArtistSample(getViewLifecycleOwner());
-            return true;
-        });
 
         bind.bestOfArtistTextViewRefreshable.setOnLongClickListener(v -> {
             homeViewModel.refreshBestOfArtist(getViewLifecycleOwner());
@@ -388,30 +382,6 @@ public class HomeTabMusicFragment extends Fragment implements ClickCallback {
         artistBestOfSnapHelper.attachToRecyclerView(bind.bestOfArtistRecyclerView);
     }
 
-    private void initArtistRadio() {
-        if (homeViewModel.checkHomeSectorVisibility(Constants.HOME_SECTOR_RADIO_STATION)) return;
-
-        bind.radioArtistRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
-        bind.radioArtistRecyclerView.setHasFixedSize(true);
-
-        radioArtistAdapter = new ArtistAdapter(this, true, false);
-        bind.radioArtistRecyclerView.setAdapter(radioArtistAdapter);
-        homeViewModel.getStarredArtistsSample(getViewLifecycleOwner()).observe(getViewLifecycleOwner(), artists -> {
-            if (artists == null) {
-                if (bind != null) bind.homeRadioArtistSector.setVisibility(View.GONE);
-            } else {
-                if (bind != null)
-                    bind.homeRadioArtistSector.setVisibility(!artists.isEmpty() ? View.VISIBLE : View.GONE);
-                if (bind != null)
-                    bind.afterRadioArtistDivider.setVisibility(!artists.isEmpty() ? View.VISIBLE : View.GONE);
-
-                radioArtistAdapter.setItems(artists);
-            }
-        });
-
-        CustomLinearSnapHelper artistRadioSnapHelper = new CustomLinearSnapHelper();
-        artistRadioSnapHelper.attachToRecyclerView(bind.radioArtistRecyclerView);
-    }
 
     private void initTopSongsView() {
         if (homeViewModel.checkHomeSectorVisibility(Constants.HOME_SECTOR_TOP_SONGS)) return;
@@ -787,9 +757,6 @@ public class HomeTabMusicFragment extends Fragment implements ClickCallback {
                     case Constants.HOME_SECTOR_BEST_OF:
                         bind.homeLinearLayoutContainer.addView(bind.homeBestOfArtistSector);
                         break;
-                    case Constants.HOME_SECTOR_RADIO_STATION:
-                        bind.homeLinearLayoutContainer.addView(bind.homeRadioArtistSector);
-                        break;
                     case Constants.HOME_SECTOR_TOP_SONGS:
                         bind.homeLinearLayoutContainer.addView(bind.homeGridTracksSector);
                         break;
@@ -917,7 +884,7 @@ public class HomeTabMusicFragment extends Fragment implements ClickCallback {
     @Override
     public void onArtistClick(Bundle bundle) {
         if (bundle.containsKey(Constants.MEDIA_MIX) && bundle.getBoolean(Constants.MEDIA_MIX)) {
-            Snackbar.make(requireView(), R.string.artist_adapter_radio_station_starting, Snackbar.LENGTH_LONG)
+            Snackbar.make(requireView(), R.string.artist_adapter_search_starting, Snackbar.LENGTH_LONG)
                     .setAnchorView(activity.bind.playerBottomSheet)
                     .show();
 

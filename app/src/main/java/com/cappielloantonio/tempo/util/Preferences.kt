@@ -39,7 +39,6 @@ object Preferences {
     private const val QUEUE_SYNCING_COUNTDOWN = "queue_syncing_countdown"
     private const val ROUNDED_CORNER = "rounded_corner"
     private const val ROUNDED_CORNER_SIZE = "rounded_corner_size"
-    private const val RADIO_SECTION_VISIBILITY = "radio_section_visibility"
     private const val MUSIC_DIRECTORY_SECTION_VISIBILITY = "music_directory_section_visibility"
     private const val REPLAY_GAIN_MODE = "replay_gain_mode"
     private const val AUDIO_TRANSCODE_PRIORITY = "audio_transcode_priority"
@@ -321,15 +320,6 @@ object Preferences {
     }
 
 
-    @JvmStatic
-    fun isRadioSectionVisible(): Boolean {
-        return App.getInstance().preferences.getBoolean(RADIO_SECTION_VISIBILITY, true)
-    }
-
-    @JvmStatic
-    fun setRadioSectionHidden() {
-        App.getInstance().preferences.edit().putBoolean(RADIO_SECTION_VISIBILITY, false).apply()
-    }
 
     @JvmStatic
     fun isMusicDirectorySectionVisible(): Boolean {
@@ -493,10 +483,6 @@ object Preferences {
     }
 
 
-    @JvmStatic
-    fun showRadioSection(): Boolean {
-        return App.getInstance().preferences.getBoolean(RADIO_SECTION_VISIBILITY, false)
-    }
 
     @JvmStatic
     fun showMusicDirectorySection(): Boolean {

@@ -14,7 +14,6 @@ import com.cappielloantonio.tempo.glide.CustomGlideRequest;
 import com.cappielloantonio.tempo.model.Download;
 import com.cappielloantonio.tempo.repository.DownloadRepository;
 import com.cappielloantonio.tempo.subsonic.models.Child;
-import com.cappielloantonio.tempo.subsonic.models.InternetRadioStation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,37 +131,6 @@ public class MappingUtil {
                 .build();
     }
 
-    public static MediaItem mapInternetRadioStation(InternetRadioStation internetRadioStation) {
-        Uri uri = Uri.parse(internetRadioStation.getStreamUrl());
-
-        Bundle bundle = new Bundle();
-        bundle.putString("id", internetRadioStation.getId());
-        bundle.putString("title", internetRadioStation.getName());
-        bundle.putString("artist", uri.toString());
-        bundle.putString("uri", uri.toString());
-        bundle.putString("type", Constants.MEDIA_TYPE_RADIO);
-
-        return new MediaItem.Builder()
-                .setMediaId(internetRadioStation.getId())
-                .setMediaMetadata(
-                        new MediaMetadata.Builder()
-                                .setTitle(internetRadioStation.getName())
-                                .setArtist(internetRadioStation.getStreamUrl())
-                                .setExtras(bundle)
-                                .setIsBrowsable(false)
-                                .setIsPlayable(true)
-                                .build()
-                )
-                .setRequestMetadata(
-                        new MediaItem.RequestMetadata.Builder()
-                                .setMediaUri(uri)
-                                .setExtras(bundle)
-                                .build()
-                )
-                // .setMimeType(MimeTypes.BASE_TYPE_AUDIO)
-                .setUri(uri)
-                .build();
-    }
 
 
     private static Uri getUri(Child media) {

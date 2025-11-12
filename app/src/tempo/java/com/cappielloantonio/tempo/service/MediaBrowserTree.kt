@@ -46,8 +46,6 @@ object MediaBrowserTree {
     private const val DIRECTORY_ID = "[directoryID]"
     private const val PLAYLIST_ID = "[playlistID]"
 
-    // Second level OTHER_ID
-    private const val RADIO_ID = "[radioID]"
 
     private const val ALBUM_ID = "[albumID]"
     private const val ARTIST_ID = "[artistID]"
@@ -300,20 +298,6 @@ object MediaBrowserTree {
         treeNodes[LIBRARY_ID]!!.addChild(PLAYLIST_ID)
 
         // Second level OTHER_ID
-
-
-        treeNodes[RADIO_ID] =
-            MediaItemNode(
-                buildMediaItem(
-                    title = "Radio stations",
-                    mediaId = RADIO_ID,
-                    isPlayable = false,
-                    isBrowsable = true,
-                    mediaType = MediaMetadata.MEDIA_TYPE_FOLDER_RADIO_STATIONS
-                )
-            )
-
-        treeNodes[OTHER_ID]!!.addChild(RADIO_ID)
     }
 
     fun getRootItem(): MediaItem {
@@ -341,7 +325,6 @@ object MediaBrowserTree {
             RANDOM_ID -> automotiveRepository.getRandomSongs(100)
             FOLDER_ID -> automotiveRepository.getMusicFolders(id)
             PLAYLIST_ID -> automotiveRepository.getPlaylists(id)
-            RADIO_ID -> automotiveRepository.internetRadioStations
 
             else -> {
                 if (id.startsWith(MOST_PLAYED_ID)) {

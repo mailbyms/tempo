@@ -216,18 +216,6 @@ public class PlayerControllerFragment extends Fragment {
 
         if (mediaBrowser.getMediaMetadata().extras != null) {
             switch (mediaBrowser.getMediaMetadata().extras.getString("type", Constants.MEDIA_TYPE_MUSIC)) {
-                case Constants.MEDIA_TYPE_RADIO:
-                    bind.getRoot().setShowShuffleButton(false);
-                    bind.getRoot().setShowRewindButton(false);
-                    bind.getRoot().setShowPreviousButton(false);
-                    bind.getRoot().setShowNextButton(false);
-                    bind.getRoot().setShowFastForwardButton(false);
-                    bind.getRoot().setRepeatToggleModes(RepeatModeUtil.REPEAT_TOGGLE_MODE_NONE);
-                    bind.getRoot().findViewById(R.id.player_playback_speed_button).setVisibility(View.GONE);
-                    bind.getRoot().findViewById(R.id.player_skip_silence_toggle_button).setVisibility(View.GONE);
-                    bind.getRoot().findViewById(R.id.button_favorite).setVisibility(View.GONE);
-                    setPlaybackParameters(mediaBrowser);
-                    break;
                 case Constants.MEDIA_TYPE_MUSIC:
                 default:
                     bind.getRoot().setShowShuffleButton(true);
