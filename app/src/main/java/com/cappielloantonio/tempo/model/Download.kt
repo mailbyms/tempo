@@ -6,21 +6,26 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.cappielloantonio.tempo.subsonic.models.Child
 import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.IgnoredOnParcel
 
 @Keep
 @Parcelize
 @Entity(tableName = "download")
 class Download(@PrimaryKey override val id: String) : Child(id) {
     @ColumnInfo(name = "playlist_id")
+    @IgnoredOnParcel
     var playlistId: String? = null
 
     @ColumnInfo(name = "playlist_name")
+    @IgnoredOnParcel
     var playlistName: String? = null
 
     @ColumnInfo(name = "download_state", defaultValue = "1")
+    @IgnoredOnParcel
     var downloadState: Int = 0
 
     @ColumnInfo(name = "download_uri", defaultValue = "")
+    @IgnoredOnParcel
     var downloadUri: String? = null
 
     constructor(child: Child) : this(child.id) {

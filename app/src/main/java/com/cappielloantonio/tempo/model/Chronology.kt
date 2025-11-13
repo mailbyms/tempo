@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 import com.cappielloantonio.tempo.subsonic.models.Child
 import com.cappielloantonio.tempo.util.Preferences
 import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.IgnoredOnParcel
 import java.util.*
 
 @Keep
@@ -15,9 +16,11 @@ import java.util.*
 @Entity(tableName = "chronology")
 class Chronology(@PrimaryKey override val id: String) : Child(id) {
     @ColumnInfo(name = "timestamp")
+    @IgnoredOnParcel
     var timestamp: Long = System.currentTimeMillis()
 
     @ColumnInfo(name = "server")
+    @IgnoredOnParcel
     var server: String? = null
 
     constructor(mediaItem: MediaItem) : this(mediaItem.mediaMetadata.extras!!.getString("id")!!) {

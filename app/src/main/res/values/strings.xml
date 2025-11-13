@@ -29,6 +29,7 @@
     <string name="album_page_tracks_count_and_duration">%1$d songs  •  %2$d minutes</string>
     <string name="app_name">Tempo</string>
     <string name="artist_adapter_search_starting">Searching…</string>
+    <string name="artist_adapter_radio_station_starting">Searching…</string>
     <string name="artist_bottom_sheet_instant_mix">Instant mix</string>
     <string name="artist_bottom_sheet_shuffle">Shuffle</string>
     <string name="artist_catalogue_title">Artists</string>
@@ -187,6 +188,7 @@
     <string name="menu_pin_button">Add to home screen</string>
     <string name="menu_unpin_button">Remove from home screen</string>
     <string name="menu_sort_year">Year</string>
+    <string name="media_route_menu_title">Cast</string>
     <string name="player_playback_speed">%1$.2fx</string>
     <string name="player_queue_clean_all_button">Clean play queue</string>
     <string name="player_server_priority">Server Priority</string>

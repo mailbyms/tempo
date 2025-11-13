@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.cappielloantonio.tempo.subsonic.models.Child
 import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.IgnoredOnParcel
 
 @Keep
 @Parcelize
@@ -13,15 +14,19 @@ import kotlinx.parcelize.Parcelize
 class Queue(override val id: String) : Child(id) {
     @PrimaryKey
     @ColumnInfo(name = "track_order")
+    @IgnoredOnParcel
     var trackOrder: Int = 0
 
     @ColumnInfo(name = "last_play")
+    @IgnoredOnParcel
     var lastPlay: Long = 0
 
     @ColumnInfo(name = "playing_changed")
+    @IgnoredOnParcel
     var playingChanged: Long = 0
 
     @ColumnInfo(name = "stream_id")
+    @IgnoredOnParcel
     var streamId: String? = null
 
     constructor(child: Child) : this(child.id) {
