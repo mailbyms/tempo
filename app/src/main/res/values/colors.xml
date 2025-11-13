@@ -61,6 +61,10 @@
     <color name="dividerColor">#e0e0e0</color>
     <color name="white">#FFFFFF</color>
 
+    <!-- 透明度颜色定义 -->
+    <color name="transparent_75_percent">#BF000000</color>
+    <color name="transparent_80_percent">#C0000000</color>
+
     <color name="lyricsTextColor">#252525</color>
     <color name="shadowsLyricsTextColor">#B4B4B4</color>
 

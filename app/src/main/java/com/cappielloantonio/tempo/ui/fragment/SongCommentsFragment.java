@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cappielloantonio.tempo.R;
 import com.cappielloantonio.tempo.databinding.FragmentSongCommentsBinding;
 import com.cappielloantonio.tempo.ui.adapter.SongCommentAdapter;
 import com.cappielloantonio.tempo.viewmodel.SongCommentsViewModel;
@@ -50,6 +51,7 @@ public class SongCommentsFragment extends BottomSheetDialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStyle(STYLE_NORMAL, R.style.TransparentBottomSheetDialog);
 
         if (getArguments() != null) {
             songId = getArguments().getString(ARG_SONG_ID);
